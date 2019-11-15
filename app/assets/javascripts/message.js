@@ -6,26 +6,24 @@ $(function(){
         }
          var html = 
          `<div class="message">
-            <div class="upper-message">
-            <div class="upper-message__user-name">
-         　　${message.user_name}
-         　</div>
-         <div class="upper-message__date">
-         ${message.created_at}
+         <div class="upper-message">
+             <div class="upper-message__user-name">
+          　　　　${message.user_name}
+          　　</div>
+          　　<div class="upper-message__date">
+          　　　　${message.created_at}
+          　　</div>
          </div>
-         </div>
-         <div class="lower-message">
-         <p class="lower-message__content">
-         ${message.content}
-        　</p>
-         ${insertImage}
-         </div>
-         </div>`
+          <div class="lower-message">
+             <p class="lower-message__content">
+             　　${message.content}
+             </p>
+          ${insertImage}
+          </div>
+  　　　　</div>`
 
         return html;
-        
-
-      }
+    }
 
 
     $('#new_message').on('submit', function(e){
@@ -57,5 +55,11 @@ $(function(){
         .fail(function(){
             alert('メッセージ送信に失敗しました');
         })
+
+        .always(function(){
+          $('.form__submit').prop('disabled', false);
+        });
+
+        
     });
 });
