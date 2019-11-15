@@ -46,10 +46,6 @@ $(function(){
             else {
               alert('メッセージを入力してください');
             }
-            
-            $('#new_message')[0].reset();
-            $('.form__message').animate({scrollTop: $('.form__message')[0].scrollHeight}, 10);
-            $('.form__submit').prop('disabled', false);
         })
 
         .fail(function(){
@@ -59,7 +55,5 @@ $(function(){
         .always(function(){
           $('.form__submit').prop('disabled', false);
         });
-
-        
     });
 });
