@@ -1,5 +1,16 @@
 class UsersController < ApplicationController
 
+    def index
+      return nil if params[:keyword] == ""
+      # ここの記述をすることによってnilが生まれるけど、どう作用するのか？
+      @users = User.where(['name LIKE ?', "%#{params[:keyword]}%"])
+      
+      respond_to do |format|
+        format.html
+        format.json
+      end
+    end
+
     def edit
     end
   
