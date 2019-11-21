@@ -48,7 +48,7 @@ $(function() {
               addUser(user);
             });
           } else if (input.length == 0) {
-            return false;
+            
           } else {
             addNoUser();
           }
@@ -61,8 +61,10 @@ $(function() {
 
 
     $(document).on("click", ".chat-group-user__btn--add", function() {
-    userName = $(this).attr("data-user-name");
-    userId = $(this).attr("data-user-id");
+    userName = $(this).data("user-name");
+    userId = $(this).data("user-id");
+    console.log("user-name");
+    console.log("user-id");
       $(this)
         .parent()
         .remove();
