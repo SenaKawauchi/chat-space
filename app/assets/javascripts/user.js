@@ -32,7 +32,6 @@ $(function() {
     $("#user-search-field").on("keyup", function() {
       let input = $("#user-search-field").val();
 
-
       $.ajax({
         type: "GET",
         url: "/users",
@@ -40,31 +39,28 @@ $(function() {
         dataType: "json"
       })
 
-        .done(function(users) {
-          $("#user-search-result").empty();
-  
-          if (users.length !== 0) {
+       .done(function(users) {
+            $("#user-search-result").empty();
+
+            if (users.length !== 0) {
             users.forEach(function(user) {
-              addUser(user);
+                addUser(user);
             });
-          } else if (input.length == 0) {
-            
-          } else {
+            } else if (input.length == 0) {
+              return false;
+            } else {
             addNoUser();
-          }
+            }
         })
         .fail(function() {
-          alert("通信エラーです。ユーザーが表示できません。");
+            alert("通信エラーです。ユーザーが表示できません。");
         });
-    });
-
-
+        });
 
     $(document).on("click", ".chat-group-user__btn--add", function() {
     userName = $(this).data("user-name");
     userId = $(this).data("user-id");
-    console.log("user-name");
-    console.log("user-id");
+   
       $(this)
         .parent()
         .remove();
