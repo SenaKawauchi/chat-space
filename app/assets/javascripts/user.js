@@ -50,13 +50,13 @@ $(function() {
             
              else {
             addNoUser();
-            
             }
         })
         .fail(function() {
             alert("通信エラーです。ユーザーが表示できません。");
         });
         });
+        
 
     $(document).on("click", ".chat-group-user__btn--add", function() {
     userName = $(this).data("user-name");
