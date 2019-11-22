@@ -17,6 +17,7 @@ $(function() {
       `;
       $("#user-search-result").append(html);
     }
+
     function addDeleteUser(name, id) {
       let html = `
       <div class="chat-group-user clearfix" id="${id}">
@@ -25,6 +26,7 @@ $(function() {
       </div>`;
       $(".js-add-user").append(html);
     }
+
     function addMember(userId) {
       let html = `<input value="${userId}" name="group[user_ids][]" type="hidden" id="group_user_ids_${userId}" />`;
       $(`#${userId}`).append(html);
@@ -39,35 +41,33 @@ $(function() {
         dataType: "json"
       })
 
-       .done(function(users) {
-            $("#user-search-result").empty();
-
-            if (users.length !== 0) {
+      .done(function(users) {
+        $("#user-search-result").empty();
+          if (users.length !== 0) {
             users.forEach(function(user) {
-                addUser(user);
+            addUser(user);
             });
-            } 
-            
-             else {
-            addNoUser();
-            }
-        })
-        .fail(function() {
-            alert("通信エラーです。ユーザーが表示できません。");
-        });
-        });
+          }
+          else {
+          addNoUser();
+          }
+      })
+      .fail(function() {
+        alert("通信エラーです。ユーザーが表示できません。");
+      });
+    });
         
-
     $(document).on("click", ".chat-group-user__btn--add", function() {
-    userName = $(this).data("user-name");
-    userId = $(this).data("user-id");
+      userName = $(this).data("user-name");
+      userId = $(this).data("user-id");
    
       $(this)
         .parent()
         .remove();
-      addDeleteUser(userName, userId);
-      addMember(userId);
+        addDeleteUser(userName, userId);
+        addMember(userId);
     });
+
     $(document).on("click", ".chat-group-user__btn--remove", function() {
       $(this)
         .parent()
