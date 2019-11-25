@@ -5,27 +5,27 @@ $(function(){
           insertImage = `<img src="${message.image}">`;
         }
          var html = 
-         `<div class="message">
-         <div class="upper-message">
-             <div class="upper-message__user-name">
-          　　　　${message.user_name}
-          　　</div>
-          　　<div class="upper-message__date">
-          　　　　${message.created_at}
-          　　</div>
-         </div>
-          <div class="lower-message">
-             <p class="lower-message__content">
-             　　${message.content}
-             </p>
-          ${insertImage}
-          </div>
-  　　　　</div>`
+         `<div class="message" data-message-id="${message.id}">
+         　　<div class="upper-message">
+              <div class="upper-message__user-name">
+              ${message.user_name}
+              </div>
+              <div class="upper-message__date">
+              ${message.created_at}
+              </div>
+            </div>
+            <div class="lower-message">
+              <p class="lower-message__content">
+              ${message.content}
+              </p>
+               ${insertImage}
+            </div>
+          </div>`
 
         return html;
     }
 
-
+    
     $('#new_message').on('submit', function(e){
         e.preventDefault();
         var formData = new FormData(this);
@@ -63,4 +63,29 @@ $(function(){
 
         
     });
+
+
+    var reloadMessages = function() {
+        last_message_id = $('.message').last().data('messageId')
+       
+        
+        $.ajax({
+          url: 'api/messages',
+          type: 'get',
+          dataType: 'json',
+          data: {id: last_message_id}
+        })
+        .done(function(messages) {
+          var insertHTML = '';
+          messages.forEach(function (message){
+            insertHTML = buildHTML(message);
+            $('.messages').append(insertHTML);
+            $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 10);
+          })
+        })
+        .fail(function() {
+          console.log('自動更新に失敗しました');
+        })}
+        setInterval(reloadMessages, 7000);
+
 });
