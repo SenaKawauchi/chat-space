@@ -4,6 +4,7 @@ $(function(){
         if (message.image) {
           insertImage = `<img src="${message.image}">`;
         }
+        // ここから上の記述がよくわからない
          var html = 
          `<div class="message" data-message-id="${message.id}">
          　　<div class="upper-message">
@@ -28,8 +29,10 @@ $(function(){
     
     $('#new_message').on('submit', function(e){
         e.preventDefault();
+        // デフォルトのイベントを止める
         var formData = new FormData(this);
         var url = $(this).attr('action');
+        // $(this).attr('action');この記述でパスを取得することができる！→console.logで確認してみるといい！
         $.ajax({
             url: url,
             type: "POST",
@@ -42,6 +45,7 @@ $(function(){
             var html = buildHTML(data);
             if (data.length != 0) {
             $('.messages').append(html);}
+            // .messageに追加してしまうと全ての投稿に追加されてしまうので、親要素である.messagesに追加する
             else {
               alert('メッセージを入力してください');
             } 
@@ -53,6 +57,7 @@ $(function(){
         })
         .always(function(){
           $('.form__submit').prop('disabled', false);
+          
         });
     });
 

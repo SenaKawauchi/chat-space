@@ -43,6 +43,7 @@ $(function() {
 
       .done(function(users) {
         $("#user-search-result").empty();
+        // .remove();にした場合一致するものが無いという表示がうまくできない
           if (users.length !== 0) {
             users.forEach(function(user) {
             addUser(user);
@@ -57,20 +58,20 @@ $(function() {
       });
     });
         
+    // ここから下はdoneで帰って来た非同期通信の「追加」と「削除」に関するコード
     $(document).on("click", ".chat-group-user__btn--add", function() {
       userName = $(this).data("user-name");
       userId = $(this).data("user-id");
+      
    
-      $(this)
-        .parent()
-        .remove();
+      $(this).parent().remove();
+      // .chat-group-user__btn--addの親要素を.parent()で取得して、.remove()で削除する。
         addDeleteUser(userName, userId);
+        // 下の欄に追加する記述
         addMember(userId);
     });
 
     $(document).on("click", ".chat-group-user__btn--remove", function() {
-      $(this)
-        .parent()
-        .remove();
+      $(this).parent().remove();
     });
   });
