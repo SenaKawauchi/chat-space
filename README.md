@@ -35,7 +35,7 @@ ALTER TABLE users ADD INDEX (name);
 - has_many :user_groups
 - has_many :messages
 - has_many :groups , through: :user_groups
-
+<!-- through: :user_groupsの記述は中間テーブルを通過しているということ -->
 ##groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -44,7 +44,7 @@ ALTER TABLE users ADD INDEX (name);
 - has_many :uses_groups
 - has_many :masseges
 - has_many :users , through: :user_groups
-
+<!-- through: :user_groupsの記述は中間テーブルを通過しているということ -->
 ##messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -63,3 +63,5 @@ ALTER TABLE users ADD INDEX (name);
 ### Association
 - belongs_to :user
 - belongs_to :group
+
+

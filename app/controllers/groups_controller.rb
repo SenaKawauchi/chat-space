@@ -30,6 +30,8 @@ class GroupsController < ApplicationController
     private
     def group_params
       params.require(:group).permit(:name, { :user_ids => [] })
+      # 更新ボタンを押した際に、飛んでくる情報を受け取る記述。
+      # function addMember(userId)のhiddonから飛んでくる
     end
 
     def set_group

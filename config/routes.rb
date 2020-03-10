@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
     namespace :api do
       resources :messages, only: :index, defaults: { format: 'json' }
+      # defaults :{ format: 'json'}でjsonに飛ぶように設定している。
+      # defaults: { format: 'json' }がなくても自動更新は一応発火できる
+      # 理由はapi/messages_controllerに飛んでくるルーティングがjson形式でしか飛んでこないから
+      # respond toはHTMLかJsonかを判断して返すものなのでこの場合は
+
     end
   end
 end

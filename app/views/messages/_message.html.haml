@@ -1,4 +1,6 @@
-.message{ "data-message-id": message.id}
+-# この記述はメッセージ１つ１つの記述。自動更新で非同期ではない場合に参照してくるのはここのid
+-# ここのmessageはindex.html.hamlから情報がきている。
+.message{ "data-message-id": "#{message.id}"}
   .upper-message
     .upper-message__user-name
       = message.user.name

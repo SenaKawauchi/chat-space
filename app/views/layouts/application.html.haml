@@ -6,6 +6,8 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    -# application.jsを読んでいる
   %body
     = render 'layouts/notifications'
+    -# ↑フラッシュメッセージを読んでいる記述
     =yield

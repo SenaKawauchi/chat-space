@@ -7,25 +7,38 @@
       .left-header
         .left-header__title
           = @group.name
+          -# =はrubyタグを使用する際に必用なもの
         %ul.left-header__members
         
           Member：
           %li.member
+            -# = @group.users.pluck(:name).join(", ")
             - @group.group_users.each do |group_user|
               = group_user.user.name
           
       .right-header
         .right-header__button
           = link_to "Edit", edit_group_path(@group), class:"edit"
+
     .messages
       = render partial: 'message', collection: @messages
+      -# render @messagesでも可能
+      -# →@messagesからeachで１つ１つ要素を取り出すという記述を省略している。
+
+
       
-            
+
     .form
       = form_for [@group, @message] do |f|
-        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        = f.text_field :content, class: 'form__message', placeholder: 'type a messge'
+        /上記の記述でform__messageのクラスが定義されている、それと並列でform__maskがあるのでインデントは同じ
         .form__mask
-          = f.label :image, class: 'form__mask__image' do
-            = fa_icon 'picture-o', class: 'icon'
+          = f.label :image, class: 'form__mask__image'do
+            =fa_icon 'picture-o', class: 'icon'
             = f.file_field :image, class: 'hidden'
-        = f.submit 'Send', class: 'form__submit'
+            /hiddenにしないとデフォルトの意味わからん表示がされてしまうのでhiddenで設定している
+        = f.submit 'send', class: 'form__submit'
+
+
+/ railsの書き方だとネストをしてあげることによってladelを押したらそれ以下のクラスも
+/         全て反映できるようにしている
