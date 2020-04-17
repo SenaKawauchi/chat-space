@@ -35,6 +35,7 @@ $(function(){
         // preventDefault();を実行しないとredirect_toが発火して同期通信になってしまう
         var formData = new FormData(this);
         var url = $(this).attr('action');
+       
         // 上記の.attr('action')はhamlで書いているurlをattrで取得している
         // $(this).attr('action');この記述でパスを取得することができる！→console.logで確認してみるといい！
         $.ajax({
