@@ -55,12 +55,13 @@ $(function(){
 
             var html = buildHTML(data);
             if (data.length !=0) {
-            $('.messages').append(html);}
+            $('.messages').append(html);
             // ここの記述はhamlの方で設定している記述なので、_message.html.hamlを読んでいる
             // .messageに追加してしまうと全ての投稿に追加されてしまうので、親要素である.messagesに追加する
-            else {
+            } else {
               alert('メッセージを入力してください');
-            } 
+            };
+          
             $('#new_message')[0].reset();
             $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");  
         })
